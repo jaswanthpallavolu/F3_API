@@ -17,9 +17,11 @@ connection.once('open', () => {
 // ROUTES
 const categoryRouter = require('./routes/categories')
 const ItemRouter = require('./routes/items')
+const fitnessRouter = require('./routes/fitness')
 
 app.use('/nutrition/category', categoryRouter)
 app.use('/nutrition/item', ItemRouter)
+app.use('/fitness', fitnessRouter)
 
 let port = process.env.PORT || 2000
 app.listen(port, () => {
