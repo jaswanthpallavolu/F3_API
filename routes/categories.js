@@ -59,8 +59,7 @@ const getCompleteDetails = async (category) => {
             const b = {
                 id: i._id,
                 name: i.itemName,
-                url: i.url,
-                more: i.more ? i.more : {}
+                url: i.url
             }
             a.push(b)
         }

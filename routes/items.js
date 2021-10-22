@@ -6,10 +6,10 @@ router.route('/').get(async (req, res) => {
     res.json(b)
 })
 const getItem = async (i) => {
-    const result = { itemId: i._id, itemName: i.itemName, url: i.url }
+    const result = { itemId: i._id, itemName: i.itemName, url: i.url, more: {} }
     if (i?.more) {
-        const more = { description: i.more?.description }
-        let list = []
+        const more = { description: i.more?.description, blogs: [] }
+        const list = []
         for (let j of i.more.blogs) {
             const obj = { name: j.name, link: j.link }
             list.push(obj)
@@ -56,13 +56,5 @@ router.route('/:id').put((req, res) => {
         res.json(data)
     })
 })
-// router.route('/update/more/:id').put((req, res) => {
-//     var newValues = {
-//         more: req.body.more
-//     }
-//     Item.findById({ _id: req.params.id }).updateOne(newValues, (err, data) => {
-//         if (err) throw err;
-//         res.json(data)
-//     })
-// })
+
 module.exports = router
