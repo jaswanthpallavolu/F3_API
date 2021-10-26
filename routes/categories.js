@@ -4,27 +4,7 @@ const Category = require('../models/category.model')
 const Item = require('../models/item.model')
 
 
-const values = async () => {
-    let result = []
-    for (let cat of categories) {
-        const items = await Item.find({ categoryId: cat.id })
-        let a = []
-        items.forEach(i => {
-            const b = {
-                name: i.itemName,
-                url: i.url
-            }
-            a.push(b)
-        })
-        const obj = {
-            category: cat.category,
-            id: cat.id,
-            items: a
-        }
-        result.push(obj)
-    }
-    return result
-}
+
 const getCategories = async (categories) => {
     const result = []
     for (let cate of categories) {
@@ -74,7 +54,7 @@ const getCompleteDetails = async (category) => {
 }
 router.route('/:id').get(async (req, res) => {
     const category = await Category.find({ _id: req.params.id })
-    const list = await getCompleteDetails(category)
+    const list = category ? await getCompleteDetails(category) : "category not found"
     res.json(list)
 })
 

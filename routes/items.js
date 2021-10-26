@@ -20,8 +20,10 @@ const getItem = async (i) => {
     return result
 }
 router.route('/:id').get(async (req, res) => {
+    console.log(req.params.id)
     const item = await Item.findById({ _id: req.params.id })
-    res.json(await getItem(item))
+    if (item) res.json(await getItem(item))
+    else res.status(400).json('item not found')
 })
 router.route('/add').post((req, res) => {
     const obj = {
